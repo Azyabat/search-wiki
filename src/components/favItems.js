@@ -11,7 +11,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-import { DelChosen } from '../index';
+import { DelChosen } from './actions';
 
 
 const mapStateToProps = (state) => {

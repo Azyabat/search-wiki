@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import SearchItem from './components/searchItem'
 import FavItem from './components/favItems'
@@ -12,7 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 //redux////////////////////////////////////
 import { connect } from 'react-redux';
-import { SetResultWiki } from './index';
+import { SetResultWiki } from './components/actions';
 
 
 const mapStateToProps = (state) => {

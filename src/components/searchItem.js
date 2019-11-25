@@ -11,7 +11,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-import { AddChosen } from '../index';
+import { AddChosen } from './actions';
 
 function SearchItem(props) {
 
