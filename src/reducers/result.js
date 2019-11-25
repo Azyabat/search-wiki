@@ -4,7 +4,6 @@ export default function MainStore(state = { text: '' }, action) {
             return {
                 ...state, text: action.payload
             }
-            break;
         default: return state;
     }
 }

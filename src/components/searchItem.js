@@ -11,7 +11,16 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-import { AddChosen } from './actions';
+import { AddChosen } from '../js/Actions';
+
+const mapStateToProps = (state) => {
+  if (state.chosen) {
+    return {
+      chosen: state.chosen
+    }
+  }
+}
+
 
 function SearchItem(props) {
 
@@ -34,12 +43,24 @@ function SearchItem(props) {
   }
 
   const addChosenFunc = (element) => {
-    props.dispatch(AddChosen(
-      {
-        title: element.title,
-        description: element.description,
-        url: element.url
-      }));
+    let isAdd = true;
+
+    props.chosen.chosen && props.chosen.chosen.forEach(el => {
+      if (el.url === element.url) {
+        isAdd = false;
+      }
+    });
+
+    if (isAdd) {
+      setOpenChosen(true);
+      props.dispatch(AddChosen(
+        {
+          title: element.title,
+          description: element.description,
+          url: element.url
+        }));
+    }
+
   }
 
 
@@ -58,9 +79,12 @@ function SearchItem(props) {
               title: props.title,
               description: props.description,
               url: props.url
-            }); setOpenChosen(true);
+            });
           }}>Добавить в избранное</MenuItem>
-          <MenuItem onClick={() => { copyUrl(props.url); setOpen(true); }}>Копировать URL</MenuItem>
+          <MenuItem
+            onClick={() => { copyUrl(props.url); setOpen(true); }}>
+            Копировать URL
+           </MenuItem>
         </Menu>
         <Snackbar
           anchorOrigin={{
@@ -72,7 +96,11 @@ function SearchItem(props) {
           onClose={handleClose}
           message="URL скопирован"
           action={[
-            <IconButton key="close" aria-label="close" color="inherit" onClick={handleClose}>
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}>
               <CloseIcon />
             </IconButton>,
           ]}
@@ -87,7 +115,11 @@ function SearchItem(props) {
           onClose={handleClose}
           message="Статья добавлена в избранное"
           action={[
-            <IconButton key="close" aria-label="close" color="inherit" onClick={handleClose}>
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}>
               <CloseIcon />
             </IconButton>,
           ]}
@@ -99,7 +131,10 @@ function SearchItem(props) {
             </Typography>
           </Grid>
           <Grid item>
-            <IconButton aria-label="display more actions" edge="end" onClick={handleClick}>
+            <IconButton
+              aria-label="display more actions"
+              edge="end"
+              onClick={handleClick}>
               <MoreIcon />
             </IconButton>
           </Grid>
@@ -114,4 +149,4 @@ function SearchItem(props) {
     </Card>
   );
 }
-export default connect(null)(SearchItem);
+export default connect(mapStateToProps)(SearchItem);

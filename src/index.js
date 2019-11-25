@@ -21,6 +21,7 @@ let persistor = persistStore(store);
 
 
 
-ReactDOM.render(<RenderComponent store={store} persistor={persistor}/>, document.getElementById('root'));
+ReactDOM.render(<RenderComponent store={store} persistor={persistor} />,
+    document.getElementById('root'));
 
 serviceWorker.unregister();

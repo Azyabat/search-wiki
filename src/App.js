@@ -1,19 +1,12 @@
 import React from 'react';
 import './App.css';
-import SearchItem from './components/searchItem'
-import FavItem from './components/favItems'
-
-
-//MUI//////////////////////////////////////
+import SearchItem from './components/SearchItem'
+import FavItem from './components/FavItems'
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-
-//end MUI///////////////////////////////////
-
-//redux////////////////////////////////////
 import { connect } from 'react-redux';
-import { SetResultWiki } from './components/actions';
-
+import { SetResultWiki } from './js/Actions';
+const firstUrl = 'https://ru.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=';
 
 const mapStateToProps = (state) => {
   if (state.searchResult.text) {
@@ -33,13 +26,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-//end redux///////////////////////////////
-
-const firstUrl = 'https://ru.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=';
-
-
-//MUI//////////////////////////////////////
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
@@ -62,7 +48,6 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-/////////////////////////////////////////////////
 
 function App(props) {
 
@@ -97,7 +82,13 @@ function App(props) {
           {props.chosen && props.chosen.map((title, id) => {
             return (
               <div className="itemChosen" key={id} >
-                <FavItem url={props.chosen[id].url} title={props.chosen[id].title} id={id} description={props.chosen[id].description} />
+                <FavItem
+                  url={props.chosen[id].url}
+                  title={props.chosen[id].title}
+                  id={id}
+                  description={props.chosen[id].description}
+
+                />
               </div>
             )
           })}</div>
@@ -107,7 +98,13 @@ function App(props) {
           {props.data && props.data.label.map((title, id) => {
             return (
               <div className="itemWiki" key={id}>
-                <SearchItem url={props.data.url[id]} title={title} id={id} description={props.data.description[id]} />
+                <SearchItem
+                  url={props.data.url[id]}
+                  title={title}
+                  id={id}
+                  description={props.data.description[id]}
+
+                />
               </div>
             )
           })}
