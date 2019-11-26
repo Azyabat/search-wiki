@@ -11,13 +11,12 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-import { AddChosen } from '../js/Actions';
+import { AddChosen } from '../store/Actions/Actions';
+import {getChosen} from '../store/Selectors/Selectors';
 
 const mapStateToProps = (state) => {
-  if (state.chosen) {
     return {
-      chosen: state.chosen
-    }
+      chosen: getChosen(state)
   }
 }
 
@@ -45,7 +44,7 @@ function SearchItem(props) {
   const addChosenFunc = (element) => {
     let isAdd = true;
 
-    props.chosen.chosen && props.chosen.chosen.forEach(el => {
+    props.chosen && props.chosen.forEach(el => {
       if (el.url === element.url) {
         isAdd = false;
       }

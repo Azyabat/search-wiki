@@ -32,8 +32,9 @@ body{
  margin-bottom: 10px;
 }
 .itemChosen{
-  width: 200%;
+  width: 197%;
   margin-bottom: 10px;
+  margin-right: 3%;
 }
 h3{
   display: block;

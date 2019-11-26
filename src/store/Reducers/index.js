@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import searchResult from './result';
-import chosen from './chosen';
+import searchResult from './Result';
+import chosen from './Chosen';
 
 export default combineReducers({
     searchResult,

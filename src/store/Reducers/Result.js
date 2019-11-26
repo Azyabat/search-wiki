@@ -1,6 +1,6 @@
 export default function MainStore(state = { text: '' }, action) {
     switch (action.type) {
-        case 'RESULT_WIKI':
+        case 'SET_SEARCH_RESULT':
             return {
                 ...state, text: action.payload
             }

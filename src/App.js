@@ -5,24 +5,23 @@ import FavItem from './components/FavItems'
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { SetResultWiki } from './js/Actions';
+import { SetResultWiki } from './store/Actions/Actions';
+import {getLabel, getDescription, getUrl, getChosen} from './store/Selectors/Selectors';
 const firstUrl = 'https://ru.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=';
 
 const mapStateToProps = (state) => {
   if (state.searchResult.text) {
     return {
       data: {
-        label: state.searchResult.text[1],
-        description: state.searchResult.text[2],
-        url: state.searchResult.text[3]
+        label: getLabel(state),
+        description: getDescription(state),
+        url: getUrl(state)
       },
-      chosen: state.chosen.chosen
+      chosen: getChosen(state)
     }
   }
-  if (state.chosen) {
     return {
-      chosen: state.chosen.chosen
-    }
+      chosen: getChosen(state)
   }
 }
 
@@ -51,7 +50,7 @@ const CssTextField = withStyles({
 
 function App(props) {
 
-  const disPatch = async (word) => {
+  const getData = async (word) => {
     if (word) {
       let data = await fetch(firstUrl + word);
       await data.json().then(function (result) {
@@ -72,7 +71,7 @@ function App(props) {
           id="custom-css-outlined-input"
           autoComplete='none'
           name='textField'
-          onChange={e => disPatch(e.target.value)}
+          onChange={e => getData(e.target.value)}
         />
       </div>
       <div className="whole">

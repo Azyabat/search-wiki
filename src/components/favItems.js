@@ -11,14 +11,13 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-import { DelChosen } from '../js/Actions';
+import { DelChosen } from '../store/Actions/Actions';
+import {getChosen} from '../store/Selectors/Selectors';
 
 
 const mapStateToProps = (state) => {
-    if (state.chosen) {
         return {
-            chosen: state.chosen
-        }
+            chosen: getChosen(state)
     }
 }
 
@@ -42,7 +41,7 @@ function FavItem(props) {
     }
     const DeleteChosen = (id) => {
         props.dispatch(DelChosen(
-            props.chosen.chosen[id].url
+            props.chosen[id].url
         ))
     }
 

@@ -1,5 +1,5 @@
 export const SetResultWiki = (profile) => {
-    return { type: 'RESULT_WIKI', payload: profile };
+    return { type: 'SET_SEARCH_RESULT', payload: profile };
 };
 export const AddChosen = (element) => {
     return { type: 'ADD_CHOSEN', payload: element };
